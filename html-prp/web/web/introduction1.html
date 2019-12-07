@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>项目简介</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+
+
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script src="echarts/echarts.min.js"></script>
+	<script src="echarts/world.js"></script>
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+</head>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+  <nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的CWE编号...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">查询</button>
+						</div>
+					</div>
+					<ul>
+						<li><a href="index.html" style="color: white"><strong>首页</strong></a></li>
+						<li><button style="height: 40px; background-color: #1e2839;border-width: 0px"><a href="introduction.html" style="color: white"><strong>漏洞检测</strong></a></button></li>
+						<li><a href="vulnerability.html" style="color: white"><strong>漏洞列表</strong></a></li>
+						<li><a href="goodCode.html" style="color: white"><strong>正样本</strong></a></li>
+						<li class="has-dropdown">
+							<a style="color: white"><strong>帮助</strong></a>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载数据" id="download" style="color: white"><a href="/vulnerability.zip"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg); height: 110px">
+		<div class="overlay"></div>
+	</header>
+	
+  <div class="fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+
+			</div>
+		</div>
+	</div>
+	<div >
+	<div class="col-md-12" style="height: 80px"></div>
+        <div class="col-md-12" style="height: 50px">
+				  <form class="form-test">
+				    待检测代码
+				    <input type="text" name="test_code" class="code-input">
+				    <br>
+				    <select name="method_test" class="select-option">
+				      <option value="qiepian">切片</option>
+				      <option value="saab">Saab</option>
+			        </select>
+				    <input type="button" value="提交" id="appear" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px" >
+			      </form>
+				</div>
+
+
+
+<style>
+.form-test{
+	position:absolute;
+	top:150px;
+	left:100px;
+	right:150px;
+
+}
+.code-input{
+	position:absolute;
+	left:100px;
+
+}
+
+</style>
+
+	
+	<div class="fh5co-bg-section" id="parame_appear">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-md-12" id="mainbody">
+					<div  class="col-md-12" style="height: 50px">
+						<span style="font-size: large; color: black" class="text-left"><strong>待检测代码详细信息</strong></span>
+					</div>
+					<div  class="col-md-12" style="height: 50px">
+						<span style="font-size: x-large; color: deepskyblue" class="text-left" id="vulnerability_name"><strong></strong></span>
+					</div>
+					
+					<div class="col-md-7">
+						<div class="col-md-6" style="height: 20px">
+							<span style="font-size: small; color: black">是否存在漏洞:</span>
+							<span style="font-size: small; color: black" id="is_vulnerability"></span>
+						</div>
+						<div class="col-md-6" style="height: 20px">
+							<span style="font-size: small; color: black">漏洞类型：</span>
+							<span style="font-size: small; color: black" id="vulnerability_type"></span>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="col-md-6" style="height: 20px">
+							<span style="font-size: small; color: black">漏洞威胁等级:</span>
+							<span style="font-size: small; color: black" id="level_threat"></span>
+						</div>
+						<div class="col-md-6" style="height: 20px">
+							<span style="font-size: small; color: black">判别模型参数储存:</span>
+							<span style="font-size: small; color: black" id="memory_canshu"></span>
+						</div>
+					</div>
+					
+				
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>漏洞代码</strong></span>
+						<div class="col-md-12">
+							<pre><code class="language-c" id="code"></code></pre>
+						</div>
+					</div>
+					<!--
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>漏洞POC</strong></span>
+						<div class="col-md-12">
+							<pre><code class="language-c" id="poc"></code></pre>
+						</div>
+					</div>
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>修补后代码</strong></span>
+						<div class="col-md-12">
+							<pre><code class="language-c" id="patch_code"></code></pre>
+						</div>
+					</div>
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>漏洞公告</strong></span>
+						<div class="col-md-12">
+							<p class="text-left" style="color: black" id="announcement"></p>
+						</div>
+					</div>
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>参考网址</strong></span>
+						<div class="col-md-12">
+							<p class="text-left" style="color: black">暂无</p>
+						</div>
+					</div>
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>受影响产品</strong></span>
+						<div class="col-md-12">
+							<p class="text-left" style="color: black">暂无</p>
+						</div>
+					</div>
+					<div  class="col-md-12">
+						<span style="font-size: large; color: black" class="text-left"><strong>漏洞补丁</strong></span>
+						<div class="col-md-12">
+							<p class="text-left" style="color: black" id="patch"></p>
+						</div>
+					</div>
+					<div  class="col-md-12" style="height: 50px"></div>
+-->
+				</div>
+		</div>
+	</div>
+	
+		<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	<script>
+	
+$(document).ready(function(){
+	$("#parame_appear").hide();
+  $("#appear").click(function(){
+    $("#parame_appear").show();
+  });
+  
+});
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2019 <a href="about.html" target="_blank" title="Wings">Lab</a> - <a>5212</a></small>
+					</p>
+				</div>
+			</div>
+	  </div>
+  </footer>
+</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+
+	<script>
+		var legalArray = ['1','2','3','4','5','6','7','8','9','0'];
+		function search() {
+			var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('CWE编号不能为空！');
+            } else {
+            	var flag = true;
+            	if(input.length < 4){
+            		flag = false;
+            	} else {
+					if(input[0] != 'C' && input[0] != 'c'){
+	            		flag = false;
+	            	}
+	            	if(input[1] != 'W' && input[1] != 'w'){
+	            		flag = false;
+	            	}
+	            	if(input[2] != 'E' && input[2] != 'e'){
+	            		flag = false;
+	            	}
+	            	for(var i = 3; i < input.length; i++){
+	                    if(legalArray.indexOf(input[i]) > -1){}
+	                    else{
+	                        alert(input[i]);
+	                        flag = false;
+	                        break;
+	                    }
+	                }
+            	}
+                if(flag == false){
+                    alert('CWE编号不合法');
+                }
+                else{
+                    window.location = 'search.html#' + input;
+                }
+            }
+		}
+		$('#getUrl').bind('keydown',function(event){
+	        if(event.keyCode == "13") {
+	            var input = document.getElementById('getUrl').value;
+	            if(input === ''){
+	                alert('CWE编号不能为空！');
+	            } else {
+	            	var flag = true;
+	            	if(input.length < 4){
+	            		flag = false;
+	            	} else {
+						if(input[0] != 'C' && input[0] != 'c'){
+		            		flag = false;
+		            	}
+		            	if(input[1] != 'W' && input[1] != 'w'){
+		            		flag = false;
+		            	}
+		            	if(input[2] != 'E' && input[2] != 'e'){
+		            		flag = false;
+		            	}
+		            	for(var i = 3; i < input.length; i++){
+		                    if(legalArray.indexOf(input[i]) > -1){}
+		                    else{
+		                        alert(input[i]);
+		                        flag = false;
+		                        break;
+		                    }
+		                }
+	            	}
+	                if(flag == false){
+	                    alert('CWE编号不合法');
+	                }
+	                else{
+	                    window.location = 'search.html#' + input;
+	                }
+	            }
+	        }
+	    });
+	</script>
+
+	</body>
+</html>
+
